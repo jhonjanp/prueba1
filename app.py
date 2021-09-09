@@ -28,10 +28,10 @@ def crearpersonal_data():
 
     cursor = db.cursor()
 
-    cursor.execute('''INSERT INTO personal_data(Nombre,Correo Electrónico,Contraseña)
+    cursor.execute('''INSERT INTO personal_data(Nombre, Correo, Contraseña)
         VALUE(%s, %s, %s)''', (
         datos['Nombre'],
-        datos['Correo Electrónico'],
+        datos['Correo'],
         datos['Contraseña'],
     ))
 
@@ -47,11 +47,14 @@ def crearpersonal_data():
 def listaUsuarios():
     cursor = db.cursor(dictionary=True)
 
-    cursor.execute('select * from usuario')
+    cursor.execute('select * from personal_data')
 
     registros = cursor.fetchall()
 
     return jsonify(registros)
+
+
+
 
 
 @app.put('/registros/<id>')
@@ -62,11 +65,11 @@ def actualizarUsuario(id):
     cursor = db.cursor()
 
 
-    cursor.execute('''UPDATE usuario set Nombre=%s, 
-        Correo Electrónico=%s, Contraseña=%s where id=%s''',(
+    cursor.execute('''UPDATE personal_data set Nombre=%s, 
+        Correo=%s, Contraseña=%s where id=%s''',(
             datos['Nombre'],
-            datos['	Correo Electrónico'],
-            datos['	Contraseña'],
+            datos['Correo'],
+            datos['Contraseña'],
             id
         ))
     
@@ -75,26 +78,43 @@ def actualizarUsuario(id):
     return jsonify({
 
         "mensaje": "usuario alamcenado correctamente"
-    })
-
-
-
-
-
+    })  
+    
+    
 @app.delete('/registros/<id>')
 def eliminarUsuario(id):
 
 
-    user = User.query.get(id)
-    db.session.delete(user)
-    db.session.commit()
+    cursor = db.cursor()
+    cursor.execute('DELETE FROM personal_data where id=%s',(id,))
 
-    
+
+    db.commit()
 
     return jsonify({
 
-        "mensaje": "usuario alamcenado correctamente"
+        "mensaje": "usuario eliminado correctamente"
     })
 
+@app.get('/registros/<id>')
+def unUsuario(id):
 
+    datos=request.json
+
+    cursor = db.cursor()
+    cursor.execute('''UPDATE personal_data set Nombre=%s, 
+        Correo=%s, Contraseña=%s where id=%s''',(
+            datos['Nombre'],
+            datos['Correo'],
+            datos['Contraseña'],
+            id
+        ))
+    
+    db.commit()
+
+    return jsonify({
+
+        "mensaje": "usuario adquirido correctamente"
+    })  
+    
 app.run(debug=True)

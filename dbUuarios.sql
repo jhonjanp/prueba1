@@ -1,0 +1,15 @@
+/*!40101 SET NAMES utf8 */;
+/*!40014 SET FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET SQL_NOTES=0 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/ registros /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
+USE registros;
+
+DROP TABLE IF EXISTS personal_data;
+CREATE TABLE `personal_data` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `Nombre` varchar(225) NOT NULL,
+  `Correo` varchar(225) NOT NULL,
+  `Contraseña` varchar(225) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
