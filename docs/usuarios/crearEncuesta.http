@@ -1,0 +1,11 @@
+POST http://localhost:5000/registros
+Content-Type: application/json
+
+{
+    "Nombre": "elenadsdao",
+    "Correo": "dario-2011@hotmail.com",
+    "Contraseña": "8765432kjhkjh1"
+}
+
+
+

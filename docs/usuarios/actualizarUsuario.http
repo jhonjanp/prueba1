@@ -1,8 +1,0 @@
-PUT http://localhost:5000/registros/1
-Content-Type: application/json
-    
-    {
-    "Nombre": "dariojhgj",
-    "Correo": "dajhkjrio-2011@hotmail.com",
-    "Contraseña": "8765lkk4321"
-}

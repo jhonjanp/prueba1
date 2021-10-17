@@ -1,4 +1,5 @@
 from flask import Flask, jsonify, request
+from flask_cors import CORS 
 import mysql.connector
 
 db = mysql.connector.connect(
@@ -6,11 +7,13 @@ db = mysql.connector.connect(
     user = 'root',
     password ='password',
     database = 'registros',
-    port =3306
+    port = 3306,
     
 )
 
 app = Flask(__name__)
+CORS(app)
+
 
 @app.route('/')
 def index():
@@ -43,7 +46,7 @@ def crearpersonal_data():
     })
 
 
-@app.get('/registros')
+@app.get('/usuarios')
 def listaUsuarios():
     cursor = db.cursor(dictionary=True)
 
@@ -57,7 +60,7 @@ def listaUsuarios():
 
 
 
-@app.put('/registros/<id>')
+@app.put('/usuario/<id>')
 def actualizarUsuario(id):
 
     datos=request.json
@@ -81,7 +84,7 @@ def actualizarUsuario(id):
     })  
     
     
-@app.delete('/registros/<id>')
+@app.delete('/usuarios/<id>')
 def eliminarUsuario(id):
 
 
@@ -96,25 +99,14 @@ def eliminarUsuario(id):
         "mensaje": "usuario eliminado correctamente"
     })
 
-@app.get('/registros/<id>')
+@app.get('/Usuarios/<id>')
 def unUsuario(id):
-
-    datos=request.json
-
     cursor = db.cursor()
-    cursor.execute('''UPDATE personal_data set Nombre=%s, 
-        Correo=%s, Contraseña=%s where id=%s''',(
-            datos['Nombre'],
-            datos['Correo'],
-            datos['Contraseña'],
-            id
-        ))
-    
-    db.commit()
+    cursor.execute('SELECT * FROM personal_data where id=%s',([id]))
 
-    return jsonify({
 
-        "mensaje": "usuario adquirido correctamente"
-    })  
+    usuario = cursor.fetchall()
+
+    return jsonify(usuario)
     
 app.run(debug=True)

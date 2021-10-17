@@ -8,7 +8,7 @@ cuando el repocitorio es nuevo
 
 Cuando hacemos cambios sobre el repositorio
     git add .
-    git commit -m'cambios que realice'
+    git commit -m'mejoras'
     git push
 
 

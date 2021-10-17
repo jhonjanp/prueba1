@@ -1,5 +1,7 @@
-//////buscar dependencias nesesarias////
-///// para exportarlo pip freeze > requirements.text///
+////https://github.com/jhonjanp/prueba1.git////
+
+//////buscar dependencias nesesarias pip freeze////
+///// para exportar las dependencias pip freeze > requirements.text///
 certifi==2021.5.30
 charset-normalizer==2.0.4
 click==8.0.1

@@ -12,6 +12,6 @@ es necesario ir al archivo app.py y cambiar las credenciales de conexion a la ba
 Es necesario instalar las dependencias que se encuentran en el archivo requirements.text
 
 por ultimo ejecutar el servidor con el comando, el servidor queda escuchando en el puerto 5000.
-''' python app.py '''
+````python app.py````
 
 
